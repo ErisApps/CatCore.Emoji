@@ -1,0 +1,54 @@
+﻿name: Build CatCore.Emoji
+
+on:
+    workflow_dispatch:
+    push:
+        branches: [ main ]
+        paths:
+            - 'CatCore.Emoji/**'
+            - '.github/workflows/main.yml'
+    pull_request:
+        branches: [ main ]
+        paths:
+            - 'CatCore.Emoji/**'
+            - '.github/workflows/main.yml'
+
+jobs:
+    emoji-models-build:
+        name: Build CatCore.Emoji.Models
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Setup dotnet
+              uses: actions/setup-dotnet@v1
+              with:
+                  dotnet-version: 6.0.100
+            - name: Build
+              id: Build
+              run: dotnet build CatCore.Emoji.Models --configuration Release
+    emoji-sourcegeneration-gnoto-build:
+        name: Build CatCore.Emoji.SourceGeneration.GNoto
+        runs-on: ubuntu-latest
+        needs: emoji-models-build
+        steps:
+            - uses: actions/checkout@v2
+            - name: Setup dotnet
+              uses: actions/setup-dotnet@v1
+              with:
+                    dotnet-version: 6.0.100
+            - name: Build
+              id: Build
+              run: dotnet build CatCore.Emoji.SourceGeneration.GNoto --configuration Release
+    emoji-sourcegeneration-gnoto-unitTests:
+        name: Run CatCore.Emoji.SourceGeneration.GNoto Unit Tests
+        runs-on: ubuntu-latest
+        needs: emoji-sourcegeneration-gnoto-build
+        steps:
+            - uses: actions/checkout@v2
+            - name: Setup dotnet
+              uses: actions/setup-dotnet@v1
+              with:
+                  dotnet-version: 6.0.100
+            - name: Build
+              id: Build
+              run: dotnet test CatCore.Emoji.SourceGeneration.GNoto.UnitTests --configuration Release
