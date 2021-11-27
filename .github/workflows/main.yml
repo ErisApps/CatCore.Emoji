@@ -14,8 +14,8 @@ on:
             - '.github/workflows/main.yml'
 
 jobs:
-    emoji-models-build:
-        name: Build CatCore.Emoji.Models
+    catcore-emoji-models:
+        name: Handle CatCore.Emoji.Models
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
@@ -23,13 +23,22 @@ jobs:
               uses: actions/setup-dotnet@v1
               with:
                   dotnet-version: 6.0.100
-            - name: Build
+            - name: Build CatCore.Emoji.Models
               id: Build
               run: dotnet build CatCore.Emoji.Models --configuration Release
-    emoji-sourcegeneration-gnoto-build:
-        name: Build CatCore.Emoji.SourceGeneration.GNoto
+            - name: Pack CatCore.Emoji.Models
+              id: Pack
+              run: dotnet pack CatCore.Emoji.Models --configuration Release
+            - name: Publish CatCore.Emoji.Models Nuget to GitHub Package Registry
+              id: Pack
+              run: dotnet nuget push ./CatCore.Emoji.Models/out/*.nupkg -k ${GITHUB_TOKEN} -s https://nuget.pkg.github.com/${REPOSITORY_OWNER}/index.json --skip-duplicate
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  REPOSITORY_OWNER: ${{ github.repository_owner }}
+    catcore-emoji-sourcegeneration-gnoto:
+        name: Handle CatCore.Emoji.SourceGeneration.GNoto
         runs-on: ubuntu-latest
-        needs: emoji-models-build
+        needs: catcore-emoji-models
         steps:
             - uses: actions/checkout@v2
             - name: Setup dotnet
@@ -39,16 +48,15 @@ jobs:
             - name: Build
               id: Build
               run: dotnet build CatCore.Emoji.SourceGeneration.GNoto --configuration Release
-    emoji-sourcegeneration-gnoto-unitTests:
-        name: Run CatCore.Emoji.SourceGeneration.GNoto Unit Tests
-        runs-on: ubuntu-latest
-        needs: emoji-sourcegeneration-gnoto-build
-        steps:
-            - uses: actions/checkout@v2
-            - name: Setup dotnet
-              uses: actions/setup-dotnet@v1
-              with:
-                  dotnet-version: 6.0.100
-            - name: Build
-              id: Build
+            - name: Run CatCore.Emoji.SourceGeneration.GNoto Unit Tests
+              id: Test
               run: dotnet test CatCore.Emoji.SourceGeneration.GNoto.UnitTests --configuration Release
+            - name: Pack CatCore.Emoji.SourceGeneration.GNoto
+              id: Pack
+              run: dotnet pack CatCore.Emoji.SourceGeneration.GNoto --configuration Release
+            - name: Publish CatCore.Emoji.SourceGeneration.GNoto Nuget to GitHub Package Registry
+              id: Pack
+              run: dotnet nuget push ./CatCore.Emoji.SourceGeneration.GNoto/out/*.nupkg -k ${GITHUB_TOKEN} -s https://nuget.pkg.github.com/${REPOSITORY_OWNER}/index.json --skip-duplicate
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  REPOSITORY_OWNER: ${{ github.repository_owner }}
