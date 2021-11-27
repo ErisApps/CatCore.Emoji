@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace CatCore.GNotoEmoji.Models
+namespace CatCore.Emoji.Models
 {
 	public abstract class EmojiTreeNodeBase : Dictionary<char, IEmojiTreeLeaf>
 	{

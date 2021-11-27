@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatCore.Emoji.Models", "CatCore.Emoji.Models\CatCore.Emoji.Models.csproj", "{22C61B18-1A9C-42E1-925D-DAF2EBE7231A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatCore.Emoji.SourceGeneration.GNoto", "CatCore.Emoji.SourceGeneration.GNoto\CatCore.Emoji.SourceGeneration.GNoto.csproj", "{3917504E-7121-4CDC-B46C-31A581A6691A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{22C61B18-1A9C-42E1-925D-DAF2EBE7231A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22C61B18-1A9C-42E1-925D-DAF2EBE7231A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22C61B18-1A9C-42E1-925D-DAF2EBE7231A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22C61B18-1A9C-42E1-925D-DAF2EBE7231A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3917504E-7121-4CDC-B46C-31A581A6691A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3917504E-7121-4CDC-B46C-31A581A6691A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3917504E-7121-4CDC-B46C-31A581A6691A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3917504E-7121-4CDC-B46C-31A581A6691A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,6 +1,6 @@
-﻿using CatCore.GNotoEmoji.Models;
+﻿using CatCore.Emoji.Models;
 
-namespace CatCore.GNotoEmoji.Extensions
+namespace CatCore.Emoji.SourceGeneration.GNoto.Extensions
 {
 	internal static class EmojiTreeLeafExtensions
 	{

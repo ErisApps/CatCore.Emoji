@@ -1,22 +1,30 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using CatCore.GNotoEmoji.Extensions;
-using CatCore.GNotoEmoji.Models;
+using CatCore.Emoji.Models;
+using CatCore.Emoji.SourceGeneration.GNoto.Extensions;
+using CatCore.Emoji.SourceGeneration.GNoto.Models;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
 [assembly: InternalsVisibleTo("CatCore.GNotoEmoji.UnitTests")]
-namespace CatCore.GNotoEmoji.SourceGeneration
+namespace CatCore.Emoji.SourceGeneration.GNoto
 {
 	[Generator]
 	internal class GNotoEmojiDataSourceGenerator : ISourceGenerator
 	{
 		public void Initialize(GeneratorInitializationContext context)
 		{
+#if DEBUG
+			/*if (!Debugger.IsAttached)
+			{
+				Debugger.Launch();
+			}*/
+#endif
 			// NOP - No initialization required for source generator
 		}
 
@@ -91,9 +99,9 @@ namespace CatCore.GNotoEmoji.SourceGeneration
 			//// Usings
 			sourceBuilder.Append(@$"#nullable enable
 using System.Collections.Generic;
-using CatCore.GNotoEmoji.Models;
+using CatCore.Emoji.Models;
 
-namespace CatCore.GNotoEmoji
+namespace CatCore.Emoji.GNoto
 {{
 	public static class {className}
 	{{

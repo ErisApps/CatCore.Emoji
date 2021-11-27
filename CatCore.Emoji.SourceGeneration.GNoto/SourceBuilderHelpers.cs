@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
 using System.Text;
-using CatCore.GNotoEmoji.Models;
+using CatCore.Emoji.Models;
 
-namespace CatCore.GNotoEmoji.SourceGeneration
+namespace CatCore.Emoji.SourceGeneration.GNoto
 {
 	internal static class SourceBuilderHelpers
 	{

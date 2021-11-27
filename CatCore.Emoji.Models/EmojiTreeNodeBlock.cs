@@ -1,4 +1,4 @@
-namespace CatCore.GNotoEmoji.Models
+namespace CatCore.Emoji.Models
 {
 	public class EmojiTreeNodeBlock : EmojiTreeNodeBase, IEmojiTreeLeaf
 	{
