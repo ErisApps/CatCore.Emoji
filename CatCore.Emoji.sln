@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatCore.Emoji.Models", "Cat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatCore.Emoji.SourceGeneration.GNoto", "CatCore.Emoji.SourceGeneration.GNoto\CatCore.Emoji.SourceGeneration.GNoto.csproj", "{3917504E-7121-4CDC-B46C-31A581A6691A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatCore.Emoji.SourceGeneration.GNoto.UnitTests", "CatCore.Emoji.SourceGeneration.GNoto.UnitTests\CatCore.Emoji.SourceGeneration.GNoto.UnitTests.csproj", "{B7F29AFD-66B4-42F3-A5F5-FE4B241AC33D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{3917504E-7121-4CDC-B46C-31A581A6691A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3917504E-7121-4CDC-B46C-31A581A6691A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3917504E-7121-4CDC-B46C-31A581A6691A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7F29AFD-66B4-42F3-A5F5-FE4B241AC33D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7F29AFD-66B4-42F3-A5F5-FE4B241AC33D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7F29AFD-66B4-42F3-A5F5-FE4B241AC33D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7F29AFD-66B4-42F3-A5F5-FE4B241AC33D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
