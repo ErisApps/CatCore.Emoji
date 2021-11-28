@@ -28,7 +28,6 @@
 		<PackageReference Include="CatCore.Emoji.Models" Version="1.0.0" GeneratePathProperty="true" />
 	</ItemGroup>
 
-
 	<PropertyGroup Condition="'$(IsPack)' == 'true'">
 		<GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>
 	</PropertyGroup>

@@ -17,6 +17,8 @@
 		<PackageProjectUrl>https://github.com/ErisApps/CatCore.Emoji</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/ErisApps/CatCore.Emoji</RepositoryUrl>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<IncludeBuildOutput>false</IncludeBuildOutput> <!-- Do not include the generator as a lib dependency -->
+		<NoWarn>$(NoWarn);NU5128</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup Condition="'$(IsPack)' == 'true'">
@@ -26,17 +28,10 @@
 
 		<!-- Package the generator in the analyzer directory of the nuget package -->
 		<None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false"/>
+
+		<!-- Package the CatCore.Emoji.SourceGeneration.Common dependency alongside the generator assembly -->
+		<None Include="$(PkgCatCore_Emoji_SourceGeneration_Common)\lib\netstandard2.0\*.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
 	</ItemGroup>
-
-	<PropertyGroup Condition="'$(IsPack)' == 'true'">
-		<GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>
-	</PropertyGroup>
-
-	<Target Name="GetDependencyTargetPaths" Condition="'$(IsPack)' == 'true'">
-		<ItemGroup>
-			<TargetPathWithTargetPlatformMoniker Include="$(PkgCatCore_Emoji_SourceGeneration_Common)\lib\netstandard2.0\CatCore.Emoji.SourceGeneration.Common.dll" IncludeRuntimeDependency="false" />
-		</ItemGroup>
-	</Target>
 
 	<ItemGroup Condition="'$(IsPack)' == 'false'">
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.0.1" PrivateAssets="all" />
