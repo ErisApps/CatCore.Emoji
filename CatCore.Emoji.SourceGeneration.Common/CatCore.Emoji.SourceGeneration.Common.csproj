@@ -29,7 +29,7 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(IsPack)' == 'false'">
-		<Compile Include="..\CatCore.Emoji.Models\*.cs" Link="CatCore.Emoji.SourceGeneration.GNoto\Models\*.cs" />
+		<Compile Include="..\CatCore.Emoji.Models\*.cs" Link="CatCore.Emoji.SourceGeneration.Common\Models\*.cs" />
 	</ItemGroup>
 
 </Project>
