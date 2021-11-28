@@ -15,7 +15,10 @@
 		<PackageDescription>Contains a sourcegenerator and helper classes to generate a lookup dictionary for Google Noto emojis at compile-time.</PackageDescription>
 		<Version>1.0.0</Version>
 		<Authors>ErisApps</Authors>
+		<PackageProjectUrl>https://github.com/ErisApps/CatCore.Emoji</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/ErisApps/CatCore.Emoji</RepositoryUrl>
+		<DevelopmentDependency>true</DevelopmentDependency>
+		<SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
 	</PropertyGroup>
 
 	<ItemGroup>
