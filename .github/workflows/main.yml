@@ -5,16 +5,22 @@ on:
     push:
         branches: [ main ]
         paths:
-            - 'CatCore.Emoji/**'
+            - 'CatCore.Emoji.Models/**'
+            - 'CatCore.Emoji.SourceGeneration.Common/**'
             - 'CatCore.Emoji.SourceGeneration.GNoto/**'
             - 'CatCore.Emoji.SourceGeneration.GNoto.UnitTests/**'
+            - 'CatCore.Emoji.SourceGeneration.Twemoji/**'
+            - 'CatCore.Emoji.SourceGeneration.Twemoji.UnitTests/**'
             - '.github/workflows/main.yml'
     pull_request:
         branches: [ main ]
         paths:
-            - 'CatCore.Emoji/**'
+            - 'CatCore.Emoji.Models/**'
+            - 'CatCore.Emoji.SourceGeneration.Common/**'
             - 'CatCore.Emoji.SourceGeneration.GNoto/**'
             - 'CatCore.Emoji.SourceGeneration.GNoto.UnitTests/**'
+            - 'CatCore.Emoji.SourceGeneration.Twemoji/**'
+            - 'CatCore.Emoji.SourceGeneration.Twemoji.UnitTests/**'
             - '.github/workflows/main.yml'
 
 jobs:
