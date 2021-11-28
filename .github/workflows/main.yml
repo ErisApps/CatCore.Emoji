@@ -96,6 +96,9 @@ jobs:
             - name: Build
               id: Build
               run: dotnet build CatCore.Emoji.SourceGeneration.Twemoji --configuration Release
+            - name: Run CatCore.Emoji.SourceGeneration.Twemoji Unit Tests
+              id: Test
+              run: dotnet test CatCore.Emoji.SourceGeneration.Twemoji.UnitTests --configuration Release
             - name: Pack CatCore.Emoji.SourceGeneration.Twemoji
               id: Pack
               run: dotnet pack CatCore.Emoji.SourceGeneration.Twemoji --configuration Release --output Publish -p:IsPack=true
