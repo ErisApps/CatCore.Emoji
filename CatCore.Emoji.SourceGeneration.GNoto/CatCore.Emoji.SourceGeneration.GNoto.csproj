@@ -19,27 +19,27 @@
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.0.1" PrivateAssets="all" />
-		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.3" PrivateAssets="all" />
-	</ItemGroup>
-
 	<ItemGroup Condition="'$(IsPack)' == 'true'">
-		<PackageReference Include="CatCore.Emoji.Models" Version="1.0.0" />
-		<PackageReference Include="CatCore.Emoji.SourceGeneration.Common" Version="1.0.0" PrivateAssets="all" />
+		<PackageReference Include="CatCore.Emoji.Models" Version="1.0.0"/>
+		<!-- Take a private dependency on CatCore.Emoji.SourceGeneration.Common (PrivateAssets=all). Consumers of this generator will not reference it. -->
+		<PackageReference Include="CatCore.Emoji.SourceGeneration.Common" Version="1.0.0" PrivateAssets="all" GeneratePathProperty="true"/>
+
+		<!-- Package the generator in the analyzer directory of the nuget package -->
+		<None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false"/>
+
+		<!-- Package the Newtonsoft.Json dependency alongside the generator assembly -->
+		<None Include="$(PkgCatCore_Emoji_SourceGeneration_Common)\lib\netstandard2.0\*.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false"/>
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(IsPack)' == 'false'">
-		<Compile Include="..\CatCore.Emoji.Models\*.cs" Link="CatCore.Emoji.SourceGeneration.GNoto\Models\*.cs" />
-		<Compile Include="..\CatCore.Emoji.SourceGeneration.Common\**\*.cs" Exclude="..\CatCore.Emoji.SourceGeneration.Common\obj\**\*.cs" Link="CatCore.Emoji.SourceGeneration.GNoto\*.cs" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.0.1" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.3" PrivateAssets="all" />
+
+		<Compile Include="..\CatCore.Emoji.Models\*.cs" Link="CatCore.Emoji.SourceGeneration.GNoto\Models\*.cs"/>
+		<Compile Include="..\CatCore.Emoji.SourceGeneration.Common\**\*.cs" Exclude="..\CatCore.Emoji.SourceGeneration.Common\obj\**\*.cs" Link="CatCore.Emoji.SourceGeneration.GNoto\*.cs"/>
 	</ItemGroup>
 
 	<ItemGroup>
-		<!-- Package the generator in the analyzer directory of the nuget package -->
-		<None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Content Include="CatCore.Emoji.SourceGeneration.GNoto.props" Pack="true" PackagePath="build" />
+		<Content Include="CatCore.Emoji.SourceGeneration.GNoto.props" Pack="true" PackagePath="build"/>
 	</ItemGroup>
 </Project>
