@@ -63,6 +63,7 @@ namespace CatCore.Emoji.SourceGeneration.GNoto.UnitTests
 			foundEmojiLeaf.Should().NotBeNull();
 			foundEmojiLeaf!.Key.Should().Be(codepointsRepresentation.Replace(" ", "_").ToLowerInvariant());
 			foundEmojiLeaf.Depth.Should().Be(emojiRepresentation.ToCharArray().Length - 1);
+			foundEmojiLeaf.Url.Should().Be($"https://raw.githubusercontent.com/googlefonts/noto-emoji/main/png/72/emoji_{codepointsRepresentation.Replace(" ", "_").ToLowerInvariant()}.png");
 
 			// Not asserting failure conditions because it might either result in no matches or in a match of a fully-qualified subset emote
 		}
