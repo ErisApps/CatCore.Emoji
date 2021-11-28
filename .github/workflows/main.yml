@@ -30,7 +30,7 @@ jobs:
               id: Pack
               run: dotnet pack CatCore.Emoji.Models --configuration Release
             - name: Publish CatCore.Emoji.Models Nuget to GitHub Package Registry
-              id: Pack
+              id: Publish
               run: dotnet nuget push ./CatCore.Emoji.Models/out/*.nupkg -k ${GITHUB_TOKEN} -s https://nuget.pkg.github.com/${REPOSITORY_OWNER}/index.json --skip-duplicate
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -55,7 +55,7 @@ jobs:
               id: Pack
               run: dotnet pack CatCore.Emoji.SourceGeneration.GNoto --configuration Release
             - name: Publish CatCore.Emoji.SourceGeneration.GNoto Nuget to GitHub Package Registry
-              id: Pack
+              id: Publish
               run: dotnet nuget push ./CatCore.Emoji.SourceGeneration.GNoto/out/*.nupkg -k ${GITHUB_TOKEN} -s https://nuget.pkg.github.com/${REPOSITORY_OWNER}/index.json --skip-duplicate
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
