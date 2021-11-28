@@ -31,7 +31,7 @@ jobs:
               run: dotnet pack CatCore.Emoji.Models --configuration Release --output Publish
             - name: Authenticate to GitHub Package Registry
               id: Authenticate
-              run: dotnet nuget add source --username ${ REPOSITORY_OWNER } --password ${ GITHUB_TOKEN } --store-password-in-clear-text --name github ${ REPOSITORY_URL }
+              run: dotnet nuget add source --username $REPOSITORY_OWNER --password $GITHUB_TOKEN --store-password-in-clear-text --name github $REPOSITORY_URL
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   REPOSITORY_OWNER: ${{ github.repository_owner }}
@@ -62,7 +62,7 @@ jobs:
               run: dotnet pack CatCore.Emoji.SourceGeneration.GNoto --configuration Release --output Publish
             - name: Authenticate to GitHub Package Registry
               id: Authenticate
-              run: dotnet nuget add source --username ${ REPOSITORY_OWNER } --password ${ GITHUB_TOKEN } --store-password-in-clear-text --name github ${ REPOSITORY_URL }
+              run: dotnet nuget add source --username $REPOSITORY_OWNER --password $GITHUB_TOKEN --store-password-in-clear-text --name github $REPOSITORY_URL
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   REPOSITORY_OWNER: ${{ github.repository_owner }}
