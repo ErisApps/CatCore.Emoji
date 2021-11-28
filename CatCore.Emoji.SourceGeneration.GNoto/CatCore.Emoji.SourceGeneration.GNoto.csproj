@@ -5,8 +5,8 @@
 		<LangVersion>9</LangVersion>
 		<Nullable>enable</Nullable>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
-		<CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)Generated</CompilerGeneratedFilesOutputPath>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild> <!-- Generates a package at build -->
+		<IncludeBuildOutput>false</IncludeBuildOutput> <!-- Do not include the generator as a lib dependency -->
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -19,12 +19,14 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CatCore.Emoji.Models" Version="1.0.0" />
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.0.1" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.3" PrivateAssets="all" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Include="..\CatCore.Emoji.Models\*.cs" Link="CatCore.Emoji.SourceGeneration.GNoto\Models\*.cs" />
+		<!-- Package the generator in the analyzer directory of the nuget package -->
+		<None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
 	</ItemGroup>
 
 </Project>
