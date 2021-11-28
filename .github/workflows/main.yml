@@ -29,6 +29,13 @@ jobs:
             - name: Pack CatCore.Emoji.Models
               id: Pack
               run: dotnet pack CatCore.Emoji.Models --configuration Release --output Publish
+            - name: Authenticate to GitHub Package Registry
+              id: Authenticate
+              run: dotnet nuget add source --username ${ REPOSITORY_OWNER } --password ${ GITHUB_TOKEN } --store-password-in-clear-text --name github ${ REPOSITORY_URL }
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  REPOSITORY_OWNER: ${{ github.repository_owner }}
+                  REPOSITORY_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
             - name: Publish CatCore.Emoji.Models Nuget to GitHub Package Registry
               id: Publish
               run: dotnet nuget push ./Publish/*.nupkg -k $GITHUB_TOKEN -s --source "github" --skip-duplicate
@@ -53,6 +60,13 @@ jobs:
             - name: Pack CatCore.Emoji.SourceGeneration.GNoto
               id: Pack
               run: dotnet pack CatCore.Emoji.SourceGeneration.GNoto --configuration Release --output Publish
+            - name: Authenticate to GitHub Package Registry
+              id: Authenticate
+              run: dotnet nuget add source --username ${ REPOSITORY_OWNER } --password ${ GITHUB_TOKEN } --store-password-in-clear-text --name github ${ REPOSITORY_URL }
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  REPOSITORY_OWNER: ${{ github.repository_owner }}
+                  REPOSITORY_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
             - name: Publish CatCore.Emoji.SourceGeneration.GNoto Nuget to GitHub Package Registry
               id: Publish
               run: dotnet nuget push ./Publish/*.nupkg -k ${GITHUB_TOKEN} -s --source "github" --skip-duplicate
