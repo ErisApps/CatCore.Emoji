@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace CatCore.Emoji.SourceGeneration.Common
 {
-	internal abstract class EmojiDataSourceGeneratorBase : ISourceGenerator
+	public abstract class EmojiDataSourceGeneratorBase : ISourceGenerator
 	{
 		protected abstract string Type { get; }
 		protected abstract string BaseUrl { get; }
