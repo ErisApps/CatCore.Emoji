@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -19,12 +18,6 @@ namespace CatCore.Emoji.SourceGeneration.GNoto
 	{
 		public void Initialize(GeneratorInitializationContext context)
 		{
-#if DEBUG
-			/*if (!Debugger.IsAttached)
-			{
-				Debugger.Launch();
-			}*/
-#endif
 			// NOP - No initialization required for source generator
 		}
 
