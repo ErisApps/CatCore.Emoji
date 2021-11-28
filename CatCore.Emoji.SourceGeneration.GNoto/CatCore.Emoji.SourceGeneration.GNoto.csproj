@@ -5,8 +5,7 @@
 		<LangVersion>9</LangVersion>
 		<Nullable>enable</Nullable>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild> <!-- Generates a package at build -->
-		<IncludeBuildOutput>false</IncludeBuildOutput> <!-- Do not include the generator as a lib dependency -->
+		<IsPack>false</IsPack>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -17,13 +16,19 @@
 		<Authors>ErisApps</Authors>
 		<PackageProjectUrl>https://github.com/ErisApps/CatCore.Emoji</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/ErisApps/CatCore.Emoji</RepositoryUrl>
-		<SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CatCore.Emoji.Models" Version="1.0.0" />
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.0.1" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.3" PrivateAssets="all" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(IsPack)' == 'true'">
+		<PackageReference Include="CatCore.Emoji.Models" Version="1.0.0" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(IsPack)' == 'false'">
+		<Compile Include="..\CatCore.Emoji.Models\*.cs" Link="CatCore.Emoji.SourceGeneration.GNoto\Models\*.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

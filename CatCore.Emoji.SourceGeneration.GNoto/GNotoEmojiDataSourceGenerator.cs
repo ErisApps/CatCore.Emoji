@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using CatCore.Emoji.Models;
 using CatCore.Emoji.SourceGeneration.GNoto.Extensions;
@@ -10,7 +9,6 @@ using CatCore.Emoji.SourceGeneration.GNoto.Models;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
-[assembly: InternalsVisibleTo("CatCore.GNotoEmoji.UnitTests")]
 namespace CatCore.Emoji.SourceGeneration.GNoto
 {
 	[Generator]
