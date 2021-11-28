@@ -6,11 +6,15 @@ on:
         branches: [ main ]
         paths:
             - 'CatCore.Emoji/**'
+            - 'CatCore.Emoji.SourceGeneration.GNoto/**'
+            - 'CatCore.Emoji.SourceGeneration.GNoto.UnitTests/**'
             - '.github/workflows/main.yml'
     pull_request:
         branches: [ main ]
         paths:
             - 'CatCore.Emoji/**'
+            - 'CatCore.Emoji.SourceGeneration.GNoto/**'
+            - 'CatCore.Emoji.SourceGeneration.GNoto.UnitTests/**'
             - '.github/workflows/main.yml'
 
 jobs:
