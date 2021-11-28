@@ -17,7 +17,6 @@
 		<Authors>ErisApps</Authors>
 		<PackageProjectUrl>https://github.com/ErisApps/CatCore.Emoji</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/ErisApps/CatCore.Emoji</RepositoryUrl>
-		<DevelopmentDependency>true</DevelopmentDependency>
 		<SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
 	</PropertyGroup>
 
