@@ -1,3 +1,5 @@
+using System;
+
 namespace CatCore.Emoji.Models
 {
 	public class EmojiTreeNodeBlock : EmojiTreeNodeBase, IEmojiTreeLeaf
@@ -7,7 +9,7 @@ namespace CatCore.Emoji.Models
 #pragma warning restore CS8766
 		public int Depth { get; internal set; }
 
-		public string Url => Key != null ? $"https://raw.githubusercontent.com/googlefonts/noto-emoji/main/png/72/emoji_{Key}.png" : string.Empty;
+		public virtual string Url => throw new NotImplementedException("This is a baseclass that's used by the source generator, please use a specialized version instead.");
 
 		public EmojiTreeNodeBlock()
 		{

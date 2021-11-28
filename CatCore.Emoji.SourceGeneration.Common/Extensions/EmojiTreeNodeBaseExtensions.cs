@@ -1,6 +1,6 @@
 using CatCore.Emoji.Models;
 
-namespace CatCore.Emoji.SourceGeneration.Twemoji.Extensions
+namespace CatCore.Emoji.SourceGeneration.Common.Extensions
 {
 	internal static class EmojiTreeNodeBaseExtensions
 	{

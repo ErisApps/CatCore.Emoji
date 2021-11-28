@@ -25,7 +25,7 @@ on:
 
 jobs:
     catcore-emoji-models:
-        name: Handle CatCore.Emoji.Models
+        name: CatCore.Emoji.Models
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
@@ -51,10 +51,38 @@ jobs:
               run: dotnet nuget push ./Publish/*.nupkg -k $GITHUB_TOKEN -s "github" --skip-duplicate
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    catcore-emoji-sourcegeneration-gnoto:
-        name: Handle CatCore.Emoji.SourceGeneration.GNoto
+    catcore-emoji-sourcegeneration-common:
+        name: CatCore.Emoji.SourceGeneration.Common
         runs-on: ubuntu-latest
         needs: catcore-emoji-models
+        steps:
+            - uses: actions/checkout@v2
+            - name: Setup dotnet
+              uses: actions/setup-dotnet@v1
+              with:
+                  dotnet-version: 6.0.100
+            - name: Authenticate to GitHub Package Registry
+              id: Authenticate
+              run: dotnet nuget add source --username $REPOSITORY_OWNER --password $GITHUB_TOKEN --store-password-in-clear-text --name github $REPOSITORY_URL
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  REPOSITORY_OWNER: ${{ github.repository_owner }}
+                  REPOSITORY_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+            - name: Build
+              id: Build
+              run: dotnet build CatCore.Emoji.SourceGeneration.Common --configuration Release
+            - name: Pack CatCore.Emoji.SourceGeneration.Common
+              id: Pack
+              run: dotnet pack CatCore.Emoji.SourceGeneration.Common --configuration Release --output Publish -p:IsPack=true
+            - name: Publish CatCore.Emoji.SourceGeneration.Common Nuget to GitHub Package Registry
+              id: Publish
+              run: dotnet nuget push ./Publish/*.nupkg -k ${GITHUB_TOKEN} -s "github" --skip-duplicate
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    catcore-emoji-sourcegeneration-gnoto:
+        name: CatCore.Emoji.SourceGeneration.GNoto
+        runs-on: ubuntu-latest
+        needs: [catcore-emoji-models, catcore-emoji-sourcegeneration-common]
         steps:
             - uses: actions/checkout@v2
             - name: Setup dotnet
@@ -83,9 +111,9 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     catcore-emoji-sourcegeneration-twemoji:
-        name: Handle CatCore.Emoji.SourceGeneration.Twemoji
+        name: CatCore.Emoji.SourceGeneration.Twemoji
         runs-on: ubuntu-latest
-        needs: catcore-emoji-models
+        needs: [catcore-emoji-models, catcore-emoji-sourcegeneration-common]
         steps:
             - uses: actions/checkout@v2
             - name: Setup dotnet

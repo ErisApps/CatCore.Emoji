@@ -3,13 +3,13 @@ using System.Linq;
 using System.Text;
 using CatCore.Emoji.Models;
 
-namespace CatCore.Emoji.SourceGeneration.Twemoji
+namespace CatCore.Emoji.SourceGeneration.Common
 {
 	internal static class SourceBuilderHelpers
 	{
 		private static string Indent(uint depth = 0) => string.Empty.PadLeft((int) depth * 4).Replace("    ", "	");
 
-		internal static void AddToSourceBuilder(this EmojiTreeRoot emojiTreeRoot, StringBuilder sourceBuilder, uint tabWidth = 0)
+		internal static void AddToSourceBuilder(this EmojiTreeRoot emojiTreeRoot, StringBuilder sourceBuilder, string type, uint tabWidth = 0)
 		{
 			for (var i = 0; i < emojiTreeRoot.Count; i++)
 			{
@@ -19,10 +19,10 @@ namespace CatCore.Emoji.SourceGeneration.Twemoji
 				switch (kvp.Value)
 				{
 					case EmojiTreeNodeBlock block:
-						block.AddToSourceBuilder(sourceBuilder, tabWidth + 1);
+						block.AddToSourceBuilder(sourceBuilder, type, tabWidth + 1);
 						break;
 					case EmojiTreeLeaf leaf:
-						leaf.AddToSourceBuilder(sourceBuilder);
+						leaf.AddToSourceBuilder(sourceBuilder, type);
 						break;
 					default:
 						throw new NotSupportedException();
@@ -32,11 +32,11 @@ namespace CatCore.Emoji.SourceGeneration.Twemoji
 			}
 		}
 
-		private static void AddToSourceBuilder(this EmojiTreeNodeBlock block, StringBuilder sourceBuilder, uint tabWidth)
+		private static void AddToSourceBuilder(this EmojiTreeNodeBlock block, StringBuilder sourceBuilder, string type, uint tabWidth)
 		{
 			sourceBuilder.AppendLine(block.Key != null
-				? $"new {nameof(EmojiTreeNodeBlock)}(\"{block.Key}\", {block.Depth})"
-				: $"new {nameof(EmojiTreeNodeBlock)}");
+				? $"new {type}{nameof(EmojiTreeNodeBlock)}(\"{block.Key}\", {block.Depth})"
+				: $"new {type}{nameof(EmojiTreeNodeBlock)}");
 			sourceBuilder.Append(Indent(tabWidth - 1)).Append('{');
 
 			var propertyIndentation = Indent(tabWidth);
@@ -49,11 +49,11 @@ namespace CatCore.Emoji.SourceGeneration.Twemoji
 				switch (kvp.Value)
 				{
 					case EmojiTreeNodeBlock childBlock:
-						childBlock.AddToSourceBuilder(sourceBuilder, tabWidth + 1);
+						childBlock.AddToSourceBuilder(sourceBuilder, type, tabWidth + 1);
 						sourceBuilder.Append(i < block.Count - 1 ? "}," : '}');
 						break;
 					case EmojiTreeLeaf childLeaf:
-						childLeaf.AddToSourceBuilder(sourceBuilder);
+						childLeaf.AddToSourceBuilder(sourceBuilder, type);
 						sourceBuilder.Append(i < block.Count - 1 ? " }," : " }");
 						break;
 					default:
@@ -64,9 +64,9 @@ namespace CatCore.Emoji.SourceGeneration.Twemoji
 			sourceBuilder.AppendLine().Append(Indent(tabWidth - 1)).Append('}');
 		}
 
-		private static void AddToSourceBuilder(this EmojiTreeLeaf leaf, StringBuilder sourceBuilder)
+		private static void AddToSourceBuilder(this EmojiTreeLeaf leaf, StringBuilder sourceBuilder, string type)
 		{
-			sourceBuilder.Append($"new {nameof(EmojiTreeLeaf)}(\"{leaf.Key}\", {leaf.Depth})");
+			sourceBuilder.Append($"new {type}{nameof(EmojiTreeLeaf)}(\"{leaf.Key}\", {leaf.Depth})");
 		}
 	}
 }

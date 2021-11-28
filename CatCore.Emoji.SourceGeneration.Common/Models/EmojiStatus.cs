@@ -1,4 +1,4 @@
-namespace CatCore.Emoji.SourceGeneration.GNoto.Models
+namespace CatCore.Emoji.SourceGeneration.Common.Models
 {
 	internal enum EmojiStatus
 	{

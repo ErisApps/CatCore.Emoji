@@ -26,10 +26,12 @@
 
 	<ItemGroup Condition="'$(IsPack)' == 'true'">
 		<PackageReference Include="CatCore.Emoji.Models" Version="1.0.0" />
+		<PackageReference Include="CatCore.Emoji.SourceGeneration.Common" Version="1.0.0" PrivateAssets="all" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(IsPack)' == 'false'">
 		<Compile Include="..\CatCore.Emoji.Models\*.cs" Link="CatCore.Emoji.SourceGeneration.GNoto\Models\*.cs" />
+		<Compile Include="..\CatCore.Emoji.SourceGeneration.Common\**\*.cs" Exclude="..\CatCore.Emoji.SourceGeneration.Common\obj\**\*.cs" Link="CatCore.Emoji.SourceGeneration.GNoto\*.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

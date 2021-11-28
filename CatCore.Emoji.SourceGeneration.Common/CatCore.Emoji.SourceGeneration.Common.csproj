@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>9</LangVersion>
+		<Nullable>enable</Nullable>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<IsPack>false</IsPack>
+    </PropertyGroup>
+
+	<PropertyGroup>
+		<IsPackable>true</IsPackable>
+		<PackageId>CatCore.Emoji.SourceGeneration.Common</PackageId>
+		<PackageDescription>This package contains common classes that are shared between consumed by specialized source generator packages.</PackageDescription>
+		<Version>1.0.0</Version>
+		<Authors>ErisApps</Authors>
+		<PackageProjectUrl>https://github.com/ErisApps/CatCore.Emoji</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/ErisApps/CatCore.Emoji</RepositoryUrl>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.0.1" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.3" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(IsPack)' == 'true'">
+		<PackageReference Include="CatCore.Emoji.Models" Version="1.0.0" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(IsPack)' == 'false'">
+		<Compile Include="..\CatCore.Emoji.Models\*.cs" Link="CatCore.Emoji.SourceGeneration.GNoto\Models\*.cs" />
+	</ItemGroup>
+	
+</Project>

@@ -1,3 +1,5 @@
+using System;
+
 namespace CatCore.Emoji.Models
 {
 	public class EmojiTreeLeaf : IEmojiTreeLeaf
@@ -5,7 +7,7 @@ namespace CatCore.Emoji.Models
 		public string Key { get; }
 		public int Depth { get; }
 
-		public string Url => $"https://raw.githubusercontent.com/googlefonts/noto-emoji/main/png/72/emoji_{Key}.png";
+		public virtual string Url => throw new NotImplementedException("This is a baseclass that's used by the source generator, please use a specialized version instead.");
 
 		public EmojiTreeLeaf(string key, int depth)
 		{
