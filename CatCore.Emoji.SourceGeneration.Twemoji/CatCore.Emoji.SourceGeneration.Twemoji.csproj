@@ -38,6 +38,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Include="CatCore.Emoji.SourceGeneration.Twemoji.props" Pack="true" PackagePath="build\CatCore.Emoji.SourceGeneration.Twemoji.props" />
+		<Content Include="CatCore.Emoji.SourceGeneration.Twemoji.props" Pack="true" PackagePath="build" />
 	</ItemGroup>
 </Project>

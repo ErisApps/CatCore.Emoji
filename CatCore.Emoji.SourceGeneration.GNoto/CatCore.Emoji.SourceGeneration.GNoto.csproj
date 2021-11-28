@@ -38,6 +38,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="CatCore.Emoji.SourceGeneration.GNoto.props" Pack="true" PackagePath="build\CatCore.Emoji.SourceGeneration.GNoto.props" />
+	  <Content Include="CatCore.Emoji.SourceGeneration.GNoto.props" Pack="true" PackagePath="build" />
 	</ItemGroup>
 </Project>
