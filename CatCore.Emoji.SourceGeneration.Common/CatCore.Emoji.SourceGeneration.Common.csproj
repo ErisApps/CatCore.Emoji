@@ -25,18 +25,8 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(IsPack)' == 'true'">
-		<PackageReference Include="CatCore.Emoji.Models" Version="1.0.0" GeneratePathProperty="true" />
+		<PackageReference Include="CatCore.Emoji.Models" Version="1.0.0" />
 	</ItemGroup>
-
-	<PropertyGroup Condition="'$(IsPack)' == 'true'">
-		<GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>
-	</PropertyGroup>
-
-	<Target Name="GetDependencyTargetPaths" Condition="'$(IsPack)' == 'true'">
-		<ItemGroup>
-			<TargetPathWithTargetPlatformMoniker Include="$(PkgCatCore_Emoji_Models)\lib\netstandard2.0\CatCore.Emoji.Models.dll" IncludeRuntimeDependency="true" />
-		</ItemGroup>
-	</Target>
 
 	<ItemGroup Condition="'$(IsPack)' == 'false'">
 		<Compile Include="..\CatCore.Emoji.Models\*.cs" Link="CatCore.Emoji.SourceGeneration.GNoto\Models\*.cs" />

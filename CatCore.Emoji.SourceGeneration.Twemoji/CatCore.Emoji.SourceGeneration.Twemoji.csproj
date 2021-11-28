@@ -23,7 +23,7 @@
 
 	<ItemGroup Condition="'$(IsPack)' == 'true'">
 		<PackageReference Include="CatCore.Emoji.Models" Version="1.0.0" />
-		<!-- Take a private dependency on CatCore.Emoji.SourceGeneration.Common (PrivateAssets=all). Consumers of this generator will not reference it. -->
+		<!-- Take a private dependency on CatCore.Emoji.SourceGeneration.Common (PrivateAssets=all). Consumers of this generator will not (need to) reference it. -->
 		<PackageReference Include="CatCore.Emoji.SourceGeneration.Common" Version="1.0.0" GeneratePathProperty="true" PrivateAssets="all" />
 
 		<!-- Package the generator in the analyzer directory of the nuget package -->

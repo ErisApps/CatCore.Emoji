@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace CatCore.Emoji.SourceGeneration.Common
 {
+	[Generator]
 	public abstract class EmojiDataSourceGeneratorBase : ISourceGenerator
 	{
 		protected abstract string Type { get; }

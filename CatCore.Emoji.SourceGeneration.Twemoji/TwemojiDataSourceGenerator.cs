@@ -1,9 +1,7 @@
 ﻿using CatCore.Emoji.SourceGeneration.Common;
-using Microsoft.CodeAnalysis;
 
 namespace CatCore.Emoji.SourceGeneration.Twemoji
 {
-	[Generator]
 	public class TwemojiDataSourceGenerator : EmojiDataSourceGeneratorBase
 	{
 		protected override string Type => nameof(Twemoji);
