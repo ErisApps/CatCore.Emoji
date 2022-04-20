@@ -14,7 +14,7 @@ namespace CatCore.Emoji.SourceGeneration.Common
 		{
 			var emojiTreeLeafSpecialization = $@"namespace CatCore.Emoji.Models
 {{
-	public class {type}EmojiTreeLeaf : EmojiTreeLeaf
+	public sealed class {type}EmojiTreeLeaf : EmojiTreeLeaf
 	{{
 		public override string Url => ""{baseUrl}"" + Key + "".png"";
 
@@ -31,7 +31,7 @@ namespace CatCore.Emoji.SourceGeneration.Common
 		{
 			var emojiTreeNodeBlockSpecialization = $@"namespace CatCore.Emoji.Models
 {{
-	public class {type}EmojiTreeNodeBlock : EmojiTreeNodeBlock
+	public sealed class {type}EmojiTreeNodeBlock : EmojiTreeNodeBlock
 	{{
 		public override string Url => Key != null ? ""{baseUrl}"" + Key + "".png"" : string.Empty;
 
