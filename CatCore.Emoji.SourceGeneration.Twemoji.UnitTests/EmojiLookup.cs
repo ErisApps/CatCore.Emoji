@@ -1,49 +1,34 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using CatCore.Emoji.Models;
+using CatCore.Emoji.SourceGeneration.UnitTests.Shared;
 using FluentAssertions;
 using Xunit;
 
 namespace CatCore.Emoji.SourceGeneration.Twemoji.UnitTests
 {
-	public class EmojiLookup
+	public class EmojiLookup : EmojiSourceGeneratorTestBase
 	{
-		public enum Status
+		[Theory]
+		[MemberData(nameof(GenerateEmojiTestData), TestDataSet.Unicode13_1)]
+#pragma warning disable xUnit1026
+		public void EmojiLookupTestsUnicode13_1(string line, string codepointsRepresentation, Status status, string emojiRepresentation, string unicodeVersionIntroduced, string emoteDescription)
+#pragma warning restore xUnit1026
 		{
-			Component,
-			FullyQualified,
-			MinimallyQualified,
-			Unqualified
+			EmojiLookupTestsInternal(CatCore.Emoji.Twemoji.EmojiTesting13_1.EmojiReferenceData, line, codepointsRepresentation, status, emojiRepresentation, unicodeVersionIntroduced,
+				emojiRepresentation);
 		}
 
-		public static IEnumerable<object[]> EmojiTestData =>
-			File.ReadLines(Path.Combine(Environment.CurrentDirectory, "Resources", "Unicode13_1_EmojiTest.txt"))
-				.Where(line => !string.IsNullOrWhiteSpace(line) && line[0] != '#')
-				.Select(line =>
-				{
-					var splitEntries = line.Split(" ", StringSplitOptions.RemoveEmptyEntries).ToList();
-
-					var splitEntriesIndexCursor = splitEntries.IndexOf(";");
-					var codepointsRepresentation = string.Join(" ", splitEntries.Take(splitEntriesIndexCursor));
-
-					var status = Enum.Parse<Status>(splitEntries[++splitEntriesIndexCursor].Replace("-", string.Empty), true);
-
-					var emojiRepresentation = splitEntries[splitEntriesIndexCursor += 2];
-					var unicodeVersionIntroduced = splitEntries[++splitEntriesIndexCursor];
-
-					var emoteDescription = string.Join(" ", splitEntries.Skip(splitEntriesIndexCursor));
-
-					return new object[] { line, codepointsRepresentation, status, emojiRepresentation, unicodeVersionIntroduced, emoteDescription };
-				})
-				.Where(x => ((Status)x[2]) == Status.FullyQualified);
-
 		[Theory]
-		[MemberData(nameof(EmojiTestData))]
+		[MemberData(nameof(GenerateEmojiTestData), TestDataSet.Unicode14_0)]
 #pragma warning disable xUnit1026
-		public void EmojiLookupTests(string line, string codepointsRepresentation, Status status, string emojiRepresentation, string unicodeVersionIntroduced, string emoteDescription)
+		public void EmojiLookupTestsUnicode14_0(string line, string codepointsRepresentation, Status status, string emojiRepresentation, string unicodeVersionIntroduced, string emoteDescription)
 #pragma warning restore xUnit1026
+		{
+			EmojiLookupTestsInternal(CatCore.Emoji.Twemoji.EmojiTesting14_0.EmojiReferenceData, line, codepointsRepresentation, status, emojiRepresentation, unicodeVersionIntroduced,
+				emojiRepresentation);
+		}
+
+		private static void EmojiLookupTestsInternal(EmojiTreeRoot emojiTreeRoot, string line, string codepointsRepresentation, Status status, string emojiRepresentation,
+			string unicodeVersionIntroduced, string emoteDescription)
 		{
 			// Arrange
 			// NOP
@@ -52,7 +37,7 @@ namespace CatCore.Emoji.SourceGeneration.Twemoji.UnitTests
 			IEmojiTreeLeaf? foundEmojiLeaf = null;
 			for (var i = 0; i < line.Length; i++)
 			{
-				foundEmojiLeaf = CatCore.Emoji.Twemoji.EmojiTesting.EmojiReferenceData.LookupLeaf(line, i);
+				foundEmojiLeaf = emojiTreeRoot.LookupLeaf(line, i);
 				if (foundEmojiLeaf != null)
 				{
 					break;

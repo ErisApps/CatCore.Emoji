@@ -25,10 +25,16 @@
 	<ItemGroup>
 		<ProjectReference Include="..\CatCore.Emoji.Models\CatCore.Emoji.Models.csproj" />
 		<ProjectReference Include="..\CatCore.Emoji.SourceGeneration.Twemoji\CatCore.Emoji.SourceGeneration.Twemoji.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+		<ProjectReference Include="..\CatCore.Emoji.SourceGeneration.UnitTests.Shared\CatCore.Emoji.SourceGeneration.UnitTests.Shared.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<AdditionalFiles Include="Resources\Unicode13_1_EmojiTest.txt" ClassName="EmojiTesting">
+		<AdditionalFiles Include="..\CatCore.Emoji.SourceGeneration.UnitTests.Shared\Resources\Unicode13_1_EmojiTest.txt" ClassName="EmojiTesting13_1">
+			<Link>Resources\Unicode13_1_EmojiTest.txt</Link>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</AdditionalFiles>
+		<AdditionalFiles Include="..\CatCore.Emoji.SourceGeneration.UnitTests.Shared\Resources\Unicode14_0_EmojiTest.txt" ClassName="EmojiTesting14_0">
+			<Link>Resources\Unicode14_0_EmojiTest.txt</Link>
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</AdditionalFiles>
 	</ItemGroup>
