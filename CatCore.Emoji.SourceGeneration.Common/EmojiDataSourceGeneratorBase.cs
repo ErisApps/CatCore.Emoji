@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -16,6 +16,7 @@ namespace CatCore.Emoji.SourceGeneration.Common
 		protected abstract string Type { get; }
 		protected abstract string BaseUrl { get; }
 		protected abstract string CodepointSeparator { get; }
+		protected virtual IEnumerable<string> CodePointKeyExclusions { get; } = Array.Empty<string>();
 
 		public virtual void Initialize(GeneratorInitializationContext context)
 		{
@@ -68,9 +69,12 @@ namespace CatCore.Emoji.SourceGeneration.Common
 					var splitEntries = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
 					var splitEntriesIndexCursor = splitEntries.IndexOf(";");
-					var codepointsRepresentation = string.Join(CodepointSeparator, splitEntries.Take(splitEntriesIndexCursor).Select(x => x.ToLowerInvariant()));
+					var codepointsRepresentation = string.Join(CodepointSeparator, splitEntries
+						.Take(splitEntriesIndexCursor)
+						.Select(x => x.ToLowerInvariant())
+						.Where(x => !CodePointKeyExclusions.Contains(x)));
 
-					Enum.TryParse<EmojiStatus>( splitEntries[++splitEntriesIndexCursor].Replace("-", string.Empty), true, out var emojiStatus);
+					Enum.TryParse<EmojiStatus>(splitEntries[++splitEntriesIndexCursor].Replace("-", string.Empty), true, out var emojiStatus);
 
 					var emojiCharRepresentation = splitEntries[splitEntriesIndexCursor + 2].ToArray();
 
