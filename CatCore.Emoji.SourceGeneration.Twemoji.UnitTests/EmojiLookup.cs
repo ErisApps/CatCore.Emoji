@@ -45,10 +45,11 @@ namespace CatCore.Emoji.SourceGeneration.Twemoji.UnitTests
 			}
 
 			// Assert
+			var expectedCodepointsRepresentation = codepointsRepresentation.Replace(" ", "-").ToLowerInvariant();
 			foundEmojiLeaf.Should().NotBeNull();
-			foundEmojiLeaf!.Key.Should().Be(codepointsRepresentation.Replace(" ", "-").ToLowerInvariant());
+			foundEmojiLeaf!.Key.Should().Be(expectedCodepointsRepresentation);
 			foundEmojiLeaf.Depth.Should().Be(emojiRepresentation.ToCharArray().Length - 1);
-			foundEmojiLeaf.Url.Should().Be($"https://twemoji.maxcdn.com/v/latest/72x72/{codepointsRepresentation.Replace(" ", "-").ToLowerInvariant()}.png");
+			foundEmojiLeaf.Url.Should().Be($"https://twemoji.maxcdn.com/v/latest/72x72/{expectedCodepointsRepresentation}.png");
 
 			// Not asserting failure conditions because it might either result in no matches or in a match of a fully-qualified subset emote
 		}
