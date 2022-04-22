@@ -63,9 +63,24 @@ jobs:
               uses: actions/setup-dotnet@v1
               with:
                   dotnet-version: 6.0.x
+            - name: Authenticate to GitHub Package Registry
+              id: Authenticate
+              run: dotnet nuget add source --username $REPOSITORY_OWNER --password $GITHUB_TOKEN --store-password-in-clear-text --name github $REPOSITORY_URL
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  REPOSITORY_OWNER: ${{ github.repository_owner }}
+                  REPOSITORY_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
             - name: Build
               id: Build
               run: dotnet build CatCore.Emoji.SourceGeneration.Common --configuration Release
+            - name: Pack CatCore.Emoji.SourceGeneration.Common
+              id: Pack
+              run: dotnet pack CatCore.Emoji.SourceGeneration.Common --configuration Release --output Publish -p:IsPack=true
+            - name: Publish CatCore.Emoji.SourceGeneration.Common Nuget to GitHub Package Registry
+              id: Publish
+              run: dotnet nuget push ./Publish/*.nupkg -k ${GITHUB_TOKEN} -s "github" --skip-duplicate
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     catcore-emoji-sourcegeneration-gnoto:
         name: CatCore.Emoji.SourceGeneration.GNoto
         runs-on: ubuntu-latest
