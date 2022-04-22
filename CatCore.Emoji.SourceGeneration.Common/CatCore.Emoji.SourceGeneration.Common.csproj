@@ -11,7 +11,7 @@
 	<PropertyGroup>
 		<IsPackable>true</IsPackable>
 		<PackageId>CatCore.Emoji.SourceGeneration.Common</PackageId>
-		<PackageDescription>This package contains common classes that are shared between consumed by specialized source generator packages.</PackageDescription>
+		<PackageDescription>This package contains common classes that are consumed by the specialized source generator packages.</PackageDescription>
 		<Version>1.0.1</Version>
 		<Authors>ErisApps</Authors>
 		<PackageProjectUrl>https://github.com/ErisApps/CatCore.Emoji</PackageProjectUrl>

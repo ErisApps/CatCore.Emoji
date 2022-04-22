@@ -10,7 +10,7 @@
 	<PropertyGroup>
 		<IsPackable>true</IsPackable>
 		<PackageId>CatCore.Emoji.Models</PackageId>
-		<PackageDescription>This package contains classes that are consumed and exposed by CatCore.Emoji source generators.</PackageDescription>
+		<PackageDescription>This package contains base classes that are consumed and exposed by CatCore.Emoji source generators.</PackageDescription>
 		<Version>1.0.1</Version>
 		<Authors>ErisApps</Authors>
 		<PackageProjectUrl>https://github.com/ErisApps/CatCore.Emoji</PackageProjectUrl>
