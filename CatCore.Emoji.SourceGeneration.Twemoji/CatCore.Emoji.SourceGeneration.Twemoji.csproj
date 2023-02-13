@@ -12,7 +12,7 @@
 		<IsPackable>true</IsPackable>
 		<PackageId>CatCore.Emoji.SourceGeneration.Twemoji</PackageId>
 		<PackageDescription>This package contains a sourcegenerator and helper classes to generate a lookup dictionary for Twemoji (Twitter emojis) at compile-time.</PackageDescription>
-		<Version>1.0.2</Version>
+		<Version>1.0.3</Version>
 		<Authors>ErisApps</Authors>
 		<PackageProjectUrl>https://github.com/ErisApps/CatCore.Emoji</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/ErisApps/CatCore.Emoji</RepositoryUrl>
@@ -22,9 +22,9 @@
 	</PropertyGroup>
 
 	<ItemGroup Condition="'$(IsPack)' == 'true'">
-		<PackageReference Include="CatCore.Emoji.Models" Version="1.0.2" GeneratePathProperty="true" />
+		<PackageReference Include="CatCore.Emoji.Models" Version="1.0.3" GeneratePathProperty="true" />
 		<!-- Take a private dependency on CatCore.Emoji.SourceGeneration.Common (PrivateAssets=all). Consumers of this generator will not (need to) reference it. -->
-		<PackageReference Include="CatCore.Emoji.SourceGeneration.Common" Version="1.0.2" GeneratePathProperty="true" PrivateAssets="all" />
+		<PackageReference Include="CatCore.Emoji.SourceGeneration.Common" Version="1.0.3" GeneratePathProperty="true" PrivateAssets="all" />
 
 		<!-- Package the generator in the analyzer directory of the nuget package -->
 		<None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false"/>
