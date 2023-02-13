@@ -49,7 +49,7 @@ namespace CatCore.Emoji.SourceGeneration.Twemoji.UnitTests
 			foundEmojiLeaf.Should().NotBeNull();
 			foundEmojiLeaf!.Key.Should().Be(expectedCodepointsRepresentation);
 			foundEmojiLeaf.Depth.Should().Be(emojiRepresentation.ToCharArray().Length - 1);
-			foundEmojiLeaf.Url.Should().Be($"https://twemoji.maxcdn.com/v/latest/72x72/{expectedCodepointsRepresentation}.png");
+			foundEmojiLeaf.Url.Should().Be($"https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/72x72/{expectedCodepointsRepresentation}.png");
 
 			// Not asserting failure conditions because it might either result in no matches or in a match of a fully-qualified subset emote
 		}
